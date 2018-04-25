@@ -1,7 +1,7 @@
 FROM ruby:2.2.4
 MAINTAINER Eric McNiece <emcniece@gmail.com>
 
-ENV CHECKOUT_ID=5f8692ef3ee19df32b7f20b169c7eca7a00a9477
+ENV CHECKOUT_ID=qloud
 
 RUN apt-get update -qq && apt-get install -y --no-install-recommends build-essential \
     # for postgres
@@ -16,10 +16,15 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends build-essen
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p boarding && cd boarding \
- && git clone https://github.com/fastlane/boarding.git . \
+ && git clone https://github.com/stansidel/boarding.git . \
  && git checkout $CHECKOUT_ID \
  && gem install bundler \
  && bundle install
+
+#COPY boarding boarding
+#RUN cd boarding \
+# && gem install bundler \
+# && bundle install
 
 WORKDIR /boarding
 CMD bundle exec puma -C config/puma.rb
