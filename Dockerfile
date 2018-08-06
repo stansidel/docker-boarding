@@ -21,10 +21,10 @@ RUN mkdir -p boarding && cd boarding \
  && gem install bundler \
  && bundle install
 
-COPY boarding boarding
-RUN cd boarding \
- && gem install bundler \
- && bundle install
+# COPY boarding boarding
+# RUN cd boarding \
+#  && gem install bundler \
+#  && bundle install
 
 WORKDIR /boarding
 CMD bundle exec rake assets:precompile
